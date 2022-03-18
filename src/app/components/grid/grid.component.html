@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="levels">
+    <button class="btn btn-secondary">Easy</button>
+    <button class="btn btn-secondary">Medium</button>
+    <button class="btn btn-secondary">Hard</button>
+  </div>
+  <table class="grid" border="1">
+    <tr *ngFor="let row of numberGrid">
+      <td
+        *ngFor="let item of row"
+        [ngClass]="item != 0 ? 'filled' : 'notfilled'"
+      >
+        <span *ngIf="item != 0"> {{ item }} </span>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <table class="options">
+    <tr>
+      <td *ngFor="let val of list">
+        <span class="option"> {{ val }} </span>
+      </td>
+    </tr>
+  </table>
+</div>
