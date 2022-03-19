@@ -11,7 +11,7 @@ export class SudokuService {
   devURL: string = 'http://localhost:8080/generate-sudoku';
 
   getSudoku() {
-    console.log('service called');
+    // console.log('service called');
 
     return this.http.get(this.devURL);
   }

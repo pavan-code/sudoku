@@ -54,9 +54,9 @@ export class GridComponent implements OnInit {
           }
         }
       }
-      console.log(this.sudoku);
-      console.log(this.boolean);
-      console.log(this.disabled);
+      // console.log(this.sudoku);
+      // console.log(this.boolean);
+      // console.log(this.disabled);
 
       this.calc();
     });
@@ -74,7 +74,7 @@ export class GridComponent implements OnInit {
   }
   copy(val: number) {
     // alert(val);
-    console.log(val + ' copied');
+    // console.log(val + ' copied');
 
     this.copycontent = val;
   }
@@ -84,7 +84,7 @@ export class GridComponent implements OnInit {
     if (this.copycontent != 0) {
       if (this.disabled[row][col] == false) {
         if (this.copycontent == this.solution[row][col]) {
-          console.log('correct');
+          // console.log('correct');
 
           this.sudoku[row][col] = this.copycontent;
           this.boolean[row][col] = true;
