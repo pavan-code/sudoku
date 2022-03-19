@@ -9,6 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit {
+  ref: any;
   constructor(private service: SudokuService) {}
   numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -40,6 +41,9 @@ export class GridComponent implements OnInit {
   ];
 
   copycontent: number = 0;
+  count = 0;
+  min = 0;
+  sec = 0;
 
   ngOnInit(): void {
     this.service.getSudoku().subscribe((data: any) => {
@@ -59,6 +63,23 @@ export class GridComponent implements OnInit {
       // console.log(this.disabled);
 
       this.calc();
+      Swal.fire({
+        title: 'Start the game?',
+        allowOutsideClick: false,
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.ref = setInterval(() => {
+            this.count += 1;
+            if (this.count == 60) {
+              this.count = 0;
+              this.min += 1;
+            }
+          }, 1000);
+        } else if (result.isDenied) {
+        }
+      });
     });
   }
   calc() {
@@ -96,14 +117,16 @@ export class GridComponent implements OnInit {
               icon: 'error',
               title: 'Oops...',
               text: this.chances + ' chances left',
+              allowOutsideClick: false,
             });
             this.sudoku[row][col] = this.copycontent;
             this.boolean[row][col] = false;
             this.calc();
           } else {
             Swal.fire({
-              title: 'You have no chances left. Do you want to restart?',
-
+              title: 'You have no chances left. Restart to play new game?',
+              icon: 'warning',
+              allowOutsideClick: false,
               confirmButtonText: 'Yes',
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
@@ -121,5 +144,29 @@ export class GridComponent implements OnInit {
     } else {
       Swal.fire('Select a number to fill');
     }
+  }
+  pause() {
+    clearInterval(this.ref);
+    Swal.fire({
+      title: 'Game paused.',
+      text: 'Click OK to continue?',
+      allowOutsideClick: false,
+      icon: 'info',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.ref = setInterval(() => {
+          this.count += 1;
+          if (this.count == 60) {
+            this.count = 0;
+            this.min += 1;
+          }
+        }, 1000);
+      } else if (result.isDenied) {
+        location.reload();
+      }
+    });
   }
 }

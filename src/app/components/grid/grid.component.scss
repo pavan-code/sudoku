@@ -15,7 +15,7 @@
 }
 .default {
   font-weight: bold;
-  background-color: rgb(152, 222, 203);
+  background-color: rgb(209, 245, 255);
   color: black;
   cursor: auto;
 }
@@ -67,6 +67,13 @@ table.grid {
       padding: 10px;
       border: 1px solid rgb(160, 160, 160);
       border-radius: 16px;
+    }
+    small {
+      background-color: rgb(189, 255, 237);
+      padding: 1px 4px;
+      border: 1px solid black;
+      font-weight: bold;
+      border-radius: 50%;
     }
   }
 }

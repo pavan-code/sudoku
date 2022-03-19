@@ -1,5 +1,17 @@
 <div class="container">
   <div class="levels">
+    <b>
+      <span *ngIf="min < 10"> 0{{ min }} </span>
+      <span *ngIf="min >= 10">
+        {{ min }}
+      </span>
+      :
+      <span *ngIf="count < 10"> 0{{ count }} </span>
+      <span *ngIf="count >= 10">
+        {{ count }}
+      </span>
+    </b>
+    <button class="btn" (click)="pause()"><i class="fa fa-pause"></i></button>
     <button class="btn btn-secondary">Easy</button>
     <button class="btn btn-secondary">Medium</button>
     <button class="btn btn-secondary">Hard</button> <br />
@@ -41,8 +53,8 @@
   <table class="options">
     <tr>
       <td *ngFor="let val of numbers; let i = index">
-        <span (click)="copy(val)" class="option"> {{ val }} </span
-        >{{ list[i + 1] }}
+        <span (click)="copy(val)" class="option"> {{ val }} </span>
+        <small> {{ list[i + 1] }}</small>
       </td>
     </tr>
   </table>
