@@ -2,14 +2,10 @@
   <div class="levels">
     <b>
       <span *ngIf="min < 10"> 0{{ min }}m </span>
-      <span *ngIf="min >= 10">
-        {{ min }}
-      </span>
+      <span *ngIf="min >= 10"> {{ min }}m </span>
       :
       <span *ngIf="count < 10"> 0{{ count }}s </span>
-      <span *ngIf="count >= 10">
-        {{ count }}
-      </span>
+      <span *ngIf="count >= 10"> {{ count }}s </span>
     </b>
     <button class="btn" (click)="pause()"><i class="fa fa-pause"></i></button>
     <h1
@@ -25,7 +21,8 @@
     <!-- <button class="btn btn-secondary">Easy</button>
     <button class="btn btn-secondary">Medium</button>
     <button class="btn btn-secondary">Hard</button> <br /> -->
-    <b>Chances left: </b> {{ chances }}
+    <b>Chances left : </b>
+    <span style="font-weight: bold; font-size: 16px">{{ chances }} </span>
   </div>
   <div style="display: flex; flex-direction: row">
     <table class="grid" border="1">

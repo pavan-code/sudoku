@@ -40,6 +40,7 @@ export class GridComponent implements OnInit {
     [false, false, false, false, false, false, false, false, false],
   ];
 
+  values: number = 30;
   copycontent: number = 0;
   count = 0;
   min = 0;
@@ -69,15 +70,16 @@ export class GridComponent implements OnInit {
           }
         }
       }
-      this.sudoku = this.empty;
       // console.log(this.sudoku);
       // console.log(this.boolean);
       // console.log(this.disabled);
 
       this.calc();
+      this.sudoku = this.empty;
       Swal.fire({
         title: 'Start the game?',
         allowOutsideClick: false,
+        allowEscapeKey: false,
         confirmButtonText: 'Yes',
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
@@ -96,6 +98,7 @@ export class GridComponent implements OnInit {
       });
     });
   }
+
   calc() {
     this.list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let i = 0; i < 9; i++) {
@@ -123,15 +126,38 @@ export class GridComponent implements OnInit {
 
           this.sudoku[row][col] = this.copycontent;
           this.boolean[row][col] = true;
-          this.calc();
+          this.values = this.values - 1;
+          if (this.values != 0) {
+            console.log(this.values);
+
+            this.calc();
+          } else {
+            clearInterval(this.ref);
+            Swal.fire({
+              title: 'Game Finished',
+              text: 'Time taken: ' + this.min + ' min ' + this.count + ' sec',
+              icon: 'success',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              confirmButtonText: 'Close',
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                location.reload();
+              } else if (result.isDenied) {
+                location.reload();
+              }
+            });
+          }
         } else {
-          if (this.chances > 1) {
+          if (this.chances > 0) {
             this.chances -= 1;
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: this.chances + ' chances left',
               allowOutsideClick: false,
+              allowEscapeKey: false,
             });
             this.sudoku[row][col] = this.copycontent;
             this.boolean[row][col] = false;
@@ -141,6 +167,7 @@ export class GridComponent implements OnInit {
               title: 'You have no chances left. Restart to play new game?',
               icon: 'warning',
               allowOutsideClick: false,
+              allowEscapeKey: false,
               confirmButtonText: 'Yes',
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
@@ -167,6 +194,7 @@ export class GridComponent implements OnInit {
       title: 'Game paused.',
       text: 'Click OK to continue?',
       allowOutsideClick: false,
+      allowEscapeKey: false,
       icon: 'info',
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',

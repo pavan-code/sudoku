@@ -1,3 +1,6 @@
+.dark {
+  filter: invert(100%) hue-rotate(180deg) brightness(100%) contrast(100%);
+}
 .container {
   padding: 20px 0;
   .levels {
@@ -68,6 +71,7 @@ table.grid {
       padding: 10px 15px;
       border: 1px solid rgb(160, 160, 160);
       border-radius: 18px;
+      font-weight: bold;
     }
     small {
       background-color: rgb(189, 255, 237);
