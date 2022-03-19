@@ -43,12 +43,23 @@ export class GridComponent implements OnInit {
   copycontent: number = 0;
   count = 0;
   min = 0;
-  sec = 0;
+  empty: number[][] = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ];
 
   ngOnInit(): void {
     this.service.getSudoku().subscribe((data: any) => {
       // console.log(data);
-      this.sudoku = data[1];
+      let state = data[1];
+      this.sudoku = state;
       this.solution = data[0];
       for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
@@ -58,6 +69,7 @@ export class GridComponent implements OnInit {
           }
         }
       }
+      this.sudoku = this.empty;
       // console.log(this.sudoku);
       // console.log(this.boolean);
       // console.log(this.disabled);
@@ -70,6 +82,8 @@ export class GridComponent implements OnInit {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          this.sudoku = state;
+
           this.ref = setInterval(() => {
             this.count += 1;
             if (this.count == 60) {
@@ -146,6 +160,8 @@ export class GridComponent implements OnInit {
     }
   }
   pause() {
+    let state = this.sudoku;
+    this.sudoku = this.empty;
     clearInterval(this.ref);
     Swal.fire({
       title: 'Game paused.',
@@ -156,6 +172,7 @@ export class GridComponent implements OnInit {
       cancelButtonText: 'No',
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
+      this.sudoku = state;
       if (result.isConfirmed) {
         this.ref = setInterval(() => {
           this.count += 1;
