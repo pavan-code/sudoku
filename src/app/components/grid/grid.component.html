@@ -1,20 +1,30 @@
 <div class="container">
   <div class="levels">
     <b>
-      <span *ngIf="min < 10"> 0{{ min }} </span>
+      <span *ngIf="min < 10"> 0{{ min }}m </span>
       <span *ngIf="min >= 10">
         {{ min }}
       </span>
       :
-      <span *ngIf="count < 10"> 0{{ count }} </span>
+      <span *ngIf="count < 10"> 0{{ count }}s </span>
       <span *ngIf="count >= 10">
         {{ count }}
       </span>
     </b>
     <button class="btn" (click)="pause()"><i class="fa fa-pause"></i></button>
-    <button class="btn btn-secondary">Easy</button>
+    <h1
+      style="
+        margin: 0;
+        background-color: coral;
+        padding: 5px 10px;
+        border-radius: 10px;
+      "
+    >
+      SUDOKU
+    </h1>
+    <!-- <button class="btn btn-secondary">Easy</button>
     <button class="btn btn-secondary">Medium</button>
-    <button class="btn btn-secondary">Hard</button> <br />
+    <button class="btn btn-secondary">Hard</button> <br /> -->
     <b>Chances left: </b> {{ chances }}
   </div>
   <div style="display: flex; flex-direction: row">
