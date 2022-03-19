@@ -13,6 +13,6 @@ export class SudokuService {
   getSudoku() {
     // console.log('service called');
 
-    return this.http.get(this.devURL);
+    return this.http.get(this.prodURL);
   }
 }
