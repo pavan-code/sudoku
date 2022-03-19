@@ -1,5 +1,5 @@
 .container {
-  padding: 20px;
+  padding: 20px 0;
   .levels {
     margin: 10px 0;
     display: flex;
@@ -7,21 +7,32 @@
     align-items: center;
     gap: 10px;
   }
+  span {
+    cursor: pointer;
+
+    // padding: 12px 16px;
+  }
 }
-.filled {
+.default {
   font-weight: bold;
+  background-color: rgb(152, 222, 203);
+  color: black;
+  cursor: auto;
 }
 .notfilled {
-  background-color: rgb(210, 231, 249);
+  // background-color: rgb(210, 231, 249);
 }
 table.grid {
   margin: 0 auto;
   border: 1px solid rgb(160, 160, 160);
   border-collapse: collapse;
-  width: 400px;
+  width: auto;
+  font-size: 20px;
   height: 400px;
 
-  td {
+  td,
+  tr {
+    width: 50px;
     text-align: center;
   }
   tr:nth-child(3n) {
@@ -45,10 +56,47 @@ table.grid {
 }
 .options {
   margin: 0 auto;
-  width: 400px;
+  width: 350px;
   height: 44px;
   td {
     text-align: center;
     cursor: pointer;
+
+    span.option {
+      font-size: large;
+      padding: 10px;
+      border: 1px solid rgb(160, 160, 160);
+      border-radius: 16px;
+    }
   }
 }
+.red {
+  background-color: rgb(255, 132, 132);
+  color: black;
+  padding: 6px 15px;
+
+  font-weight: bold;
+}
+.green {
+  background-color: rgb(130, 255, 130);
+  padding: 6px 15px;
+  color: black;
+  font-weight: bold;
+}
+.zero {
+  // background-color: rgb(210, 231, 249);
+  color: black;
+  padding: 18px;
+
+  width: 50px;
+  height: 47px;
+  font-size: 0;
+}
+
+// [ngClass]="
+// boolean[r][col] == true && disabled[r][col] == false
+//   ? 'green'
+//   : boolean[r][col] == true && item != 0
+//   ? 'red'
+//   : 'zero'
+// "

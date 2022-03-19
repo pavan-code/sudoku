@@ -7,11 +7,12 @@ import { HttpClient } from '@angular/common/http';
 export class SudokuService {
   constructor(private http: HttpClient) {}
 
+  prodURL: string = 'https://sudoku-game-101.herokuapp.com/generate-sudoku';
+  devURL: string = 'http://localhost:8080/generate-sudoku';
+
   getSudoku() {
     console.log('service called');
 
-    return this.http.get(
-      'https://sudoku-game-101.herokuapp.com/generate-sudoku'
-    );
+    return this.http.get(this.devURL);
   }
 }

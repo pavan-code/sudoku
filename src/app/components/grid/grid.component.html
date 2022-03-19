@@ -2,23 +2,47 @@
   <div class="levels">
     <button class="btn btn-secondary">Easy</button>
     <button class="btn btn-secondary">Medium</button>
-    <button class="btn btn-secondary">Hard</button>
+    <button class="btn btn-secondary">Hard</button> <br />
+    <b>Chances left: </b> {{ chances }}
   </div>
-  <table class="grid" border="1">
-    <tr *ngFor="let row of numberGrid">
-      <td
-        *ngFor="let item of row"
-        [ngClass]="item != 0 ? 'filled' : 'notfilled'"
-      >
-        <span *ngIf="item != 0"> {{ item }} </span>
-      </td>
-    </tr>
-  </table>
+  <div style="display: flex; flex-direction: row">
+    <table class="grid" border="1">
+      <tr *ngFor="let row of sudoku; let r = index">
+        <td
+          *ngFor="let item of row; let col = index"
+          [ngClass]="item != 0 && disabled[r][col] ? 'default' : ''"
+        >
+          <span
+            (click)="put(r, col)"
+            [ngClass]="
+              disabled[r][col] == false
+                ? boolean[r][col] == true
+                  ? 'green'
+                  : item != 0
+                  ? 'red'
+                  : 'zero'
+                : ''
+            "
+          >
+            {{ item }}
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- <table class="grid" border="1">
+      <tr *ngFor="let row of solution">
+        <td *ngFor="let item of row">
+          <span *ngIf="item != 0"> {{ item }} </span>
+        </td>
+      </tr>
+    </table> -->
+  </div>
   <br />
   <table class="options">
     <tr>
-      <td *ngFor="let val of list">
-        <span class="option"> {{ val }} </span>
+      <td *ngFor="let val of numbers; let i = index">
+        <span (click)="copy(val)" class="option"> {{ val }} </span
+        >{{ list[i + 1] }}
       </td>
     </tr>
   </table>
