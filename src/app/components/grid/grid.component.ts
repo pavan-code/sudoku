@@ -150,7 +150,7 @@ export class GridComponent implements OnInit {
             });
           }
         } else {
-          if (this.chances > 0) {
+          if (this.chances > 1) {
             this.chances -= 1;
             Swal.fire({
               icon: 'error',
