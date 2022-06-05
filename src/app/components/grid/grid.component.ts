@@ -58,7 +58,7 @@ export class GridComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getSudoku().subscribe((data: any) => {
-      // console.log(data);
+      console.log(data);
       let state = data[1];
       this.sudoku = state;
       this.solution = data[0];
